@@ -1,12 +1,16 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Ambriz Cordero Diego Said
+ * Medeles Bryan Jonathan
+ * Rivera Andrade Jorge
  */
 package front;
 
 import javax.swing.JOptionPane;
 import back.TextoANumeroUtils;
 import back.Vehiculo;
+import back.Camion;
+import back.Coche;
+import back.Moto;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -16,6 +20,7 @@ import java.util.HashMap;
  * @author jra
  */
 public class Formulario extends javax.swing.JFrame {
+    private String tipo;
     private Vehiculo vehiculo;
     private Map<String, Vehiculo> lista = new HashMap<>();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Formulario.class.getName());
@@ -268,7 +273,9 @@ public class Formulario extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        limpiarCampos();
+        actualizaEtiquetaContador();
+        this.setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void lblMapaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMapaMouseClicked
@@ -280,31 +287,58 @@ public class Formulario extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     *
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> new Formulario().setVisible(true));
+//    }*/
+    
+    /**
+     * 
+     * @param v 
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+    public void showFormulario(String v){
+        this.setVisible(true);
+        tipo = v;
+    }
+    
+    private <T> T nuevoVehiculo() {
+        if(tipo.equals("camion")) {
+            String tonelaje = JOptionPane.showInputDialog(this, "Proporcione el tonelaje del camión: ");
+            return (T) new Camion(tonelaje);
+        } else if(tipo.equals("coche")) {
+            String carroceria = JOptionPane.showInputDialog(this, "Proporcione la carroceria del coche: ");
+            return (T) new Coche(carroceria);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Formulario().setVisible(true));
+        int cilindros;
+        String cilindrada;
+        do {
+            cilindrada = JOptionPane.showInputDialog(this, "Proporcione la cilindrada de la moto:");
+            cilindros = TextoANumeroUtils.obtenerEntero(cilindrada);
+        } while (cilindros==0);
+        
+        return (T) new Moto(cilindros);
     }
     
     private void guardarVehiculo() {
-        vehiculo = new Vehiculo();
+        vehiculo = nuevoVehiculo();
         llenarVehiculo();
         lista.put(vehiculo.getMatricula().toUpperCase(),vehiculo);
         

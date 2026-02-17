@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Ambriz Cordero Diego Said
+ * Medeles Bryan Jonathan
+ * Rivera Andrade Jorge
  */
 package back;
 
@@ -11,12 +12,12 @@ import java.util.Objects;
  * @author jra
  */
 public class Vehiculo {
-    private String marca;
-    private String modelo;
-    private String ano;
-    private String matricula;
-    private String color;
-    private double precio;
+    protected String marca;
+    protected String modelo;
+    protected String ano;
+    protected String matricula;
+    protected String color;
+    protected double precio;
 
     public Vehiculo() {
     }
