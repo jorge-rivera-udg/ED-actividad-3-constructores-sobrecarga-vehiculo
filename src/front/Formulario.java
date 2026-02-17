@@ -8,12 +8,16 @@ import javax.swing.JOptionPane;
 import back.TextoANumeroUtils;
 import back.Vehiculo;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  *
  * @author jra
  */
 public class Formulario extends javax.swing.JFrame {
     private Vehiculo vehiculo;
+    private Map<String, Vehiculo> lista = new HashMap<>();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Formulario.class.getName());
 
     /**
@@ -32,7 +36,6 @@ public class Formulario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
@@ -51,11 +54,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         btnSalir = new javax.swing.JButton();
-
-        jButton6.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jButton6.setText("Eliminar vehiculo");
-        jButton6.setActionCommand("Limpiar datos");
-        jButton6.addActionListener(this::jButton6ActionPerformed);
+        lblMapa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,25 +119,29 @@ public class Formulario extends javax.swing.JFrame {
         btnSalir.setActionCommand("Limpiar datos");
         btnSalir.addActionListener(this::btnSalirActionPerformed);
 
+        lblMapa.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        lblMapa.setForeground(new java.awt.Color(0, 0, 153));
+        lblMapa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMapa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMapaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6))
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addGap(39, 39, 39)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1))
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                     .addComponent(txtColor)
@@ -148,17 +151,22 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(txtMatricula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscar)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(37, 37, 37))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnBuscar)
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap()))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMapa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,8 +200,10 @@ public class Formulario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(btnSalir))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,48 +212,71 @@ public class Formulario extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
         if(validarCampos()){
-            btnCrear.setEnabled(false);
             btnBuscar.setEnabled(true);
         } else {
             return;
         }
         
-        vehiculo = new Vehiculo();
-        llenarVehiculo();
-        
-        JOptionPane.showMessageDialog(this, vehiculo);
-        
-        limpiarCampos();
-        
+        guardarVehiculo();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        btnActualizar.setEnabled(true);
-        btnLimpiar.setEnabled(true);
-        btnLimpiar.setEnabled(true);
+        // TODO add your handling code here:        
+        vehiculo = buscarVehiculo(txtMatricula.getText());
+
+        if(vehiculo==null) {
+            JOptionPane.showMessageDialog(this,"No se encontro el vehiculo");
+            limpiarCampos();
+        } else {
+            txtMarca.setText(vehiculo.getMarca());
+            txtModelo.setText(vehiculo.getModelo());
+            txtAnio.setText(vehiculo.getAno());
+            txtColor.setText(vehiculo.getColor());
+            txtPrecio.setText(String.format("%.2f", vehiculo.getPrecio()));
+            btnActualizar.setEnabled(true);
+            btnLimpiar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+        }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
+        if(validarCampos()){
+            guardarVehiculo();
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
+        limpiarCampos();
+        btnActualizar.setEnabled(false);
+        btnLimpiar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        vehiculo = lista.remove(txtMatricula.getText().toUpperCase());
+        String mensaje = "Vehiculo borrado con exito";
+        if(vehiculo == null) {
+            mensaje = "El vehiculo no está registrado";
+        }
+        JOptionPane.showMessageDialog(this, mensaje);
+        limpiarCampos();
+        actualizaEtiquetaContador();
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void lblMapaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMapaMouseClicked
+        // TODO add your handling code here:
+        lista.values().forEach(auto -> {
+            System.out.println(auto);
+        });
+    }//GEN-LAST:event_lblMapaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -270,6 +303,17 @@ public class Formulario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Formulario().setVisible(true));
     }
     
+    private void guardarVehiculo() {
+        vehiculo = new Vehiculo();
+        llenarVehiculo();
+        lista.put(vehiculo.getMatricula().toUpperCase(),vehiculo);
+        
+        JOptionPane.showMessageDialog(this, vehiculo);
+        
+        limpiarCampos();
+        actualizaEtiquetaContador();
+    }
+    
     private void limpiarCampos(){
         txtMatricula.setText("");
         txtMarca.setText("");
@@ -282,7 +326,7 @@ public class Formulario extends javax.swing.JFrame {
     private void llenarVehiculo(){
         vehiculo.setMarca(txtMarca.getText());
         vehiculo.setModelo(txtModelo.getText());
-        vehiculo.setMatricula(txtMatricula.getText());
+        vehiculo.setMatricula(txtMatricula.getText().toUpperCase());
         vehiculo.setAno(txtAnio.getText());
         vehiculo.setColor(txtColor.getText());
         vehiculo.setPrecio(TextoANumeroUtils.obtenerDoble(txtPrecio.getText()));
@@ -308,7 +352,24 @@ public class Formulario extends javax.swing.JFrame {
         }
         return false;
     }
+    
+    private Vehiculo buscarVehiculo(String matricula) {
+        return lista.get(matricula.toUpperCase());
+    }
 
+    private void actualizaEtiquetaContador() {
+        if(!lista.isEmpty()){
+            lblMapa.setText(String.format("Vehiculos almacenados: %5d", lista.size()));
+        } else {
+            lblMapa.setText("");
+            btnBuscar.setEnabled(false);
+            btnActualizar.setEnabled(false);
+            btnLimpiar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "No hay vehiculos registrados");
+        }
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
@@ -316,13 +377,13 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblMapa;
     private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtMarca;
