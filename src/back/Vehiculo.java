@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Ambriz Cordero Diego Said
+ * Medeles Bryan Jonathan
+ * Rivera Andrade Jorge
  */
 package back;
 
